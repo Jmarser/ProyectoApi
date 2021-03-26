@@ -87,7 +87,7 @@ public class LoginController {
 			if(aux.isActivo()) {
 				return ResponseEntity.status(HttpStatus.OK).body(aux);
 			}else {
-				return ResponseEntity.status(HttpStatus.NON_AUTHORITATIVE_INFORMATION).body("Usuario dado de baja");
+				return ResponseEntity.status(HttpStatus.CONFLICT).body("Usuario dado de baja");
 			}
 		}else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("El usuario no esta registrado");

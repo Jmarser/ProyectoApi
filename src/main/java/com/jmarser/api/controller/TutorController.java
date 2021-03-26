@@ -1,5 +1,6 @@
 package com.jmarser.api.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +13,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.jmarser.api.entity.Alumno;
+import com.jmarser.api.entity.Login;
 import com.jmarser.api.entity.Tutor;
+import com.jmarser.api.service.AlumnoService;
+import com.jmarser.api.service.LoginService;
 import com.jmarser.api.service.TutorService;
 
 @RestController
@@ -21,6 +27,10 @@ public class TutorController {
 
 	@Autowired
 	private TutorService tutorService;
+	@Autowired
+	private LoginService loginService;
+	@Autowired
+	private AlumnoService alumnoService;
 	
 	@GetMapping("/tutores")
 	public ResponseEntity<?> getAllTutores(){
@@ -82,6 +92,22 @@ public class TutorController {
 	public ResponseEntity<?> getTutorEmail(@RequestBody Tutor tutor){
 		Tutor aux = tutorService.findByEmail(tutor.getEmail());
 		if(aux != null) {
+			/*Como es posible que haya alumnos asignados a este tutor que esten dados de baja, vamos a filtrar para 
+			 * solamente pasar con el profesor la lista de alumnos dados de alta.*/
+			List<Alumno> listAlumno = new ArrayList<>();
+			Login log = null;
+			/*recorremos el array de alumnos asignados al profesor, obtenemos sus estados de login, y los que esten activos los guardamos en 
+			 * nuestro array provisional*/
+			for (int i = 0; i <aux.getAlumnosTutor().size(); i++) {
+				log = loginService.findByEmail(aux.getAlumnosTutor().get(i).getEmail());
+				if(log != null) {
+					if(log.isActivo()) {
+						listAlumno.add(alumnoService.findByEmail(log.getEmail()));
+					}
+				}
+			}
+			/*Le pasamos el array provisional al profesor y lo devolvemos al usuario*/
+			aux.setAlumnosTutor(listAlumno);
 			return ResponseEntity.status(HttpStatus.OK).body(aux);
 		}else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay tutores con ese email.");

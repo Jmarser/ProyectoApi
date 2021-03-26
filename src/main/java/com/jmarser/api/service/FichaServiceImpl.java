@@ -45,4 +45,9 @@ public class FichaServiceImpl implements FichaService{
 		fichaRepository.deleteById(id);		
 	}
 
+	@Override
+	public Ficha checkFicha(Long id, String fecha) {
+		return fichaRepository.findByAlumnoIdAndFecha(id, fecha);
+	}
+
 }

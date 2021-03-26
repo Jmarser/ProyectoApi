@@ -47,11 +47,16 @@ public class FichaController {
 	
 	@PostMapping("/save_ficha")
 	public ResponseEntity<?> saveFicha(@RequestBody Ficha ficha){
-		Ficha aux = fichaService.saveFicha(ficha);
+		Ficha aux = fichaService.checkFicha(ficha.getAlumnoId(), ficha.getFecha());
 		if(aux != null) {
-			return ResponseEntity.status(HttpStatus.CREATED).body(aux);
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Ya hay una ficha creada para esa fecha");
 		}else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se ha podido guardar la ficha.");
+			Ficha aux2 = fichaService.saveFicha(ficha);
+			if(aux2 != null) {
+				return ResponseEntity.status(HttpStatus.CREATED).body(aux);
+			}else {
+				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se ha podido guardar la ficha.");
+			}
 		}
 	}
 	

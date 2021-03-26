@@ -15,7 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jmarser.api.entity.Alumno;
+import com.jmarser.api.entity.Profesor;
+import com.jmarser.api.entity.Tutor;
+import com.jmarser.api.mapper.Mapper;
+import com.jmarser.api.model.ModelAlumno;
+import com.jmarser.api.model.ModelProfesor;
+import com.jmarser.api.model.ModelTutor;
 import com.jmarser.api.service.AlumnoService;
+import com.jmarser.api.service.ProfesorService;
+import com.jmarser.api.service.TutorService;
 
 
 @RestController
@@ -24,6 +32,12 @@ public class AlumnoController {
 
 	@Autowired
 	private AlumnoService alumnoService;
+	
+	@Autowired
+	private ProfesorService profesorService;
+	
+	@Autowired
+	private TutorService tutorService;
 	
 	@GetMapping("/alumnos")
 	public ResponseEntity<?> getAllAlumnos(){
@@ -85,7 +99,11 @@ public class AlumnoController {
 		
 		Alumno aux = alumnoService.findByEmail(alumno.getEmail());
 		if(aux!= null) {
-			return ResponseEntity.status(HttpStatus.OK).body(aux);
+			ModelProfesor modelProfesor = new ModelProfesor(profesorService.findById(aux.getProfesorId()).get());
+			ModelTutor modelTutor = new ModelTutor(tutorService.findById(aux.getTutorId()).get());
+			ModelAlumno modelAlumno = new ModelAlumno();
+			modelAlumno = Mapper.convertirAlumno(aux, modelProfesor, modelTutor);
+			return ResponseEntity.status(HttpStatus.OK).body(modelAlumno);
 		}else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Alumno no registrado.");
 		}

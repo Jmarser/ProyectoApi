@@ -11,4 +11,6 @@ import com.jmarser.api.entity.Ficha;
 public interface FichaRepository extends CrudRepository<Ficha, Long>{
 
 	public List<Ficha> findByAlumnoId(Long id);
+	
+	public Ficha findByAlumnoIdAndFecha(Long id, String fecha);
 }

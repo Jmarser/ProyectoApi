@@ -19,4 +19,6 @@ public interface FichaService {
 	
 	public void deleteById(Long id);
 	
+	public Ficha checkFicha(Long id, String fecha);
+	
 }
