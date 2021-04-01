@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="alumnos")
-public class Alumno extends ClaseBase{
+public class Alumno extends ClaseBaseUsuarios{
 
 	private static final long serialVersionUID = 1L;
 

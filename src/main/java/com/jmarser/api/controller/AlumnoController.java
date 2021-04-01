@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.jmarser.api.entity.Alumno;
-import com.jmarser.api.entity.Profesor;
-import com.jmarser.api.entity.Tutor;
 import com.jmarser.api.mapper.Mapper;
 import com.jmarser.api.model.ModelAlumno;
 import com.jmarser.api.model.ModelProfesor;
