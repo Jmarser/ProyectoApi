@@ -17,6 +17,8 @@ public class Alumno extends ClaseBaseUsuarios{
 	@Column(name="tutor_id")
 	private Long tutorId;
 	
+	private String ciclo;
+	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name="alumno_id", referencedColumnName = "id")
 	private List<Ficha> fichas = new ArrayList<>();
@@ -43,6 +45,14 @@ public class Alumno extends ClaseBaseUsuarios{
 
 	public void setTutorId(Long tutorId) {
 		this.tutorId = tutorId;
+	}
+
+	public String getCiclo() {
+		return ciclo;
+	}
+
+	public void setCiclo(String ciclo) {
+		this.ciclo = ciclo;
 	}
 	
 	

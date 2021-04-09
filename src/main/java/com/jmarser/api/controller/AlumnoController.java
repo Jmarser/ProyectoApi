@@ -74,6 +74,9 @@ public class AlumnoController {
 			aux.setPrimerApellido(alumno.getEmail());
 			aux.setSegundoApellido(alumno.getSegundoApellido());
 			aux.setEmail(alumno.getEmail());
+			aux.setCiclo(alumno.getCiclo());
+			aux.setProfesorId(alumno.getProfesorId());
+			aux.setTutorId(alumno.getTutorId());
 			return ResponseEntity.status(HttpStatus.OK).body(alumnoService.save(aux));
 		}else {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Alumno no encontrado.");
