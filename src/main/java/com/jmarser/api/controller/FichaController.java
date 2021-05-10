@@ -53,7 +53,7 @@ public class FichaController {
 		}else {
 			Ficha aux2 = fichaService.saveFicha(ficha);
 			if(aux2 != null) {
-				return ResponseEntity.status(HttpStatus.CREATED).body(aux);
+				return ResponseEntity.status(HttpStatus.CREATED).body(aux2);
 			}else {
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("No se ha podido guardar la ficha.");
 			}
@@ -65,7 +65,10 @@ public class FichaController {
 		/*Comprobamos que la ficha esta en la base de datos*/
 		if(fichaService.findById(id).isPresent()) {
 			Ficha aux = fichaService.findById(id).get();
+			aux.setHoras(ficha.getHoras());
+			aux.setFecha(ficha.getFecha());
 			aux.setDescripcion(ficha.getDescripcion());
+			aux.setObservaciones(ficha.getObservaciones());
 			aux.setFirmaAlumno(aux.isFirmaAlumno());
 			aux.setFirmaProf(ficha.isFirmaProf());
 			aux.setFirmaTutor(ficha.isFirmaTutor());

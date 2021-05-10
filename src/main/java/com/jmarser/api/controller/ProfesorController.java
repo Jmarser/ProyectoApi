@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jmarser.api.entity.Alumno;
@@ -41,6 +42,18 @@ public class ProfesorController {
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay profesores registrados.");
 		}
 	}
+	/*
+	//@GetMapping("/profesores_user")
+	@RequestMapping(value="/profesores_user", method = RequestMethod.GET)
+	public ResponseEntity<?> getAllProfesoresUser(){
+		List<Profesor> listado = profesorService.findAll();
+		if(listado != null) {
+			return ResponseEntity.status(HttpStatus.OK).body(listado);
+		}else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No hay profesores registrados.");
+		}
+	}
+	*/
 	
 	@GetMapping("/profesor/{id}")
 	public ResponseEntity<?> getProfesorById(@PathVariable(value="id")Long id){

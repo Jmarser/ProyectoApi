@@ -12,6 +12,7 @@ public class ModelAlumno extends ModelBase{
 	private List<Ficha> fichas;
 	private ModelProfesor profesor;
 	private ModelTutor tutor;
+	private String ciclo;
 	
 	
 	public ModelAlumno() {
@@ -25,6 +26,7 @@ public class ModelAlumno extends ModelBase{
 		this.setSegundoApellido(alumno.getSegundoApellido());
 		this.setEmail(alumno.getEmail());
 		this.setFichas(alumno.getFichas());
+		this.setCiclo(alumno.getCiclo());
 		this.profesor = profesor;
 		this.tutor = tutor;
 	}
@@ -52,6 +54,15 @@ public class ModelAlumno extends ModelBase{
 	public void setTutor(ModelTutor tutor) {
 		this.tutor = tutor;
 	}
+
+	public String getCiclo() {
+		return ciclo;
+	}
+
+	public void setCiclo(String ciclo) {
+		this.ciclo = ciclo;
+	}
+	
 	
 
 }
