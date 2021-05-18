@@ -1,5 +1,7 @@
 package com.jmarser.api.model;
 
+/*Clase padre, por lo que contiene los atributos comunes de las clases hijas*/
+
 public class ModelBase {
 
 	private Long id;

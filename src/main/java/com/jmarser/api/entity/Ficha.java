@@ -38,6 +38,9 @@ public class Ficha implements Serializable{
 	@Column(name="fecha")
 	private String fecha;
 	
+	@Column(name="ciclo")
+	private String ciclo;
+	
 	public Ficha() {
 	}
 
@@ -113,6 +116,14 @@ public class Ficha implements Serializable{
 
 	public void setFecha(String fecha) {
 		this.fecha = fecha;
+	}
+
+	public String getCiclo() {
+		return ciclo;
+	}
+
+	public void setCiclo(String ciclo) {
+		this.ciclo = ciclo;
 	}
 
 }

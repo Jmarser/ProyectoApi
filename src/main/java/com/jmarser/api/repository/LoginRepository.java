@@ -12,5 +12,4 @@ public interface LoginRepository extends CrudRepository<Login, Long>{
 	
 	public Login findByEmailAndPassword(String email, String password);
 	
-
 }

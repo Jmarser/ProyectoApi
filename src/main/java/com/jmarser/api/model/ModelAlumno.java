@@ -1,5 +1,6 @@
 package com.jmarser.api.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import com.jmarser.api.entity.Alumno;
 import com.jmarser.api.entity.Ficha;
@@ -25,8 +26,8 @@ public class ModelAlumno extends ModelBase{
 		this.setPrimerApellido(alumno.getPrimerApellido());
 		this.setSegundoApellido(alumno.getSegundoApellido());
 		this.setEmail(alumno.getEmail());
-		this.setFichas(alumno.getFichas());
 		this.setCiclo(alumno.getCiclo());
+		this.setFichas(alumno.getFichas());
 		this.profesor = profesor;
 		this.tutor = tutor;
 	}
@@ -35,8 +36,16 @@ public class ModelAlumno extends ModelBase{
 		return fichas;
 	}
 	
+	/*Como cabe la posibilidad de que el alumno pueda cursos varios ciclos, necesitamos filtar las fichas sólo a las del curso que 
+	 * este cursando actualmente*/
 	public void setFichas(List<Ficha> fichas) {
-		this.fichas = fichas;
+		List<Ficha> aux = new ArrayList<Ficha>();
+		for(int i = 0; i<fichas.size(); i++) {
+			if(fichas.get(i).getCiclo().equals(this.getCiclo())) {
+				aux.add(fichas.get(i));
+			}
+		}
+		this.fichas = aux;
 	}
 
 	public ModelProfesor getProfesor() {

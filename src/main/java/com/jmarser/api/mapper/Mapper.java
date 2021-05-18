@@ -11,7 +11,7 @@ import com.jmarser.api.model.ModelTutor;
 
 @Component("mapper")
 public class Mapper {
-
+	
 	public static ModelAlumno convertirAlumno(Alumno alumno, ModelProfesor profesor, ModelTutor tutor) {
 	
 		ModelAlumno modelAlumno = new ModelAlumno(alumno, profesor, tutor);
